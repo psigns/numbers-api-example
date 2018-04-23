@@ -31,8 +31,8 @@
 
 (defn number-facts [{ :keys [ number trivia ]}]
   [:div
-    [:h3 number]
-    [:h4 trivia]])
+    [:h3 number (if-not (= number nil) '(" Trivia") '(""))]
+    [:p trivia]])
 
 (defn load-url [url] (do 
   (reset! is-loading true)
@@ -50,6 +50,7 @@
 (defn number-facts-container []
   [:div
     [:h2 "Welcome to Number Facts"]
+    [:p "Enter a number and click search, or click random."]
     [number-input {
       :on-change #(reset! input-value (-> % .-target .-value))
       :on-random #(load-url (get-random-url))
